@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "279140567880",
+    "project_id": "midouchapp",
+    "storage_bucket": "midouchapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279140567880:android:fbee23efaa7b50f2e1817d",
+        "android_client_info": {
+          "package_name": "com.example.chatbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279140567880-85b08q5537iun36ue8almkln9cjifeil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZK8mUzk3p385Kl1wX0VkwVW2IDag0oPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279140567880-85b08q5537iun36ue8almkln9cjifeil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279140567880:android:4244269966fa1664e1817d",
+        "android_client_info": {
+          "package_name": "com.example.projetclassb2b"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279140567880-85b08q5537iun36ue8almkln9cjifeil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZK8mUzk3p385Kl1wX0VkwVW2IDag0oPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279140567880-85b08q5537iun36ue8almkln9cjifeil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
