@@ -32,4 +32,12 @@ Future resetPass(String email)async{
     print(e.toString());
   }
 }
+Future signOut() async{
+  try{
+
+  }catch(e){
+
+  }
+}
+
 }
