@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
                       children: [
                         TextFormField(
                           validator: (val){
-                            return val!=null&&(val.isEmpty || val.length<4) ? "Enter a correct username":null;
+                            return val!=null&&(val.length<4) ? "Enter a correct username":null;
                           },
                             controller: userNameTextEditingController,
                             style: simpleTextStyle(Colors.white, 16),
@@ -54,6 +54,9 @@ class _SignUpState extends State<SignUp> {
                             style: simpleTextStyle(Colors.white, 16),
                             decoration: textFieldInputDecoration("email")),
                         TextFormField(
+                            validator: (val){
+                              return val!=null&&(val.length>6) ? null:"password must contain 6+ characters";
+                            },
                             controller: passwordTextEditingController,
                             style: simpleTextStyle(Colors.white, 16),
                             decoration: textFieldInputDecoration("password")),
