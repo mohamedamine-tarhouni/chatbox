@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../widgets/widget.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+
+  //const SignIn({Key? key}) : super(key: key);
+  final Function toggle;
+  SignIn(this.toggle);
 
   @override
   _SignInState createState() => _SignInState();
@@ -85,7 +88,15 @@ class _SignInState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Don't have an account? ",style: simpleTextStyle(Colors.white, 17),),
-                      Text("Register Now",style: simpleTextStyle(Colors.blueAccent, 17),),
+                      
+                      GestureDetector(
+                        onTap: (){
+                          widget.toggle();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(),
+                            child: Text("Register Now",style: simpleTextStyle(Colors.blueAccent, 17),)),
+                      ),
                     ],
                   ),
                   SizedBox(
