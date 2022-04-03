@@ -27,6 +27,7 @@ class _SignInState extends State<SignIn> {
                       style: simpleTextStyle(Colors.white, 16),
                       decoration: textFieldInputDecoration("email")),
                   TextField(
+                      obscureText: true,
                       style: simpleTextStyle(Colors.white, 16),
                       decoration: textFieldInputDecoration("password")),
                   SizedBox(

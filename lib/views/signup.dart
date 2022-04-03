@@ -1,3 +1,5 @@
+import 'package:chatbox/services/auth.dart';
+import 'package:chatbox/views/chatRoomsScreen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widget.dart';
 
@@ -9,14 +11,27 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool isLoading = false;
+  AuthMethods authMethods = new AuthMethods();
   final formKey=GlobalKey<FormState>();
   TextEditingController userNameTextEditingController = new TextEditingController();
   TextEditingController emailTextEditingController = new TextEditingController();
   TextEditingController passwordTextEditingController = new TextEditingController();
 
-  signMeUp(){
+  signMeUp() async{
     final form = formKey.currentState;
-    if(form != null && !form.validate()){
+    if(form != null && form.validate()){
+      setState(() {
+        isLoading=true;
+      });
+      await authMethods.signUpwithEmailAndPassword(emailTextEditingController.text, passwordTextEditingController.text).then((value) {
+        // ignore: avoid_print
+       // print("${value.uid}");
+        Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) =>ChatRoom()
+        ));
+    
+      });
 
     }
   }
@@ -25,7 +40,9 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarMain(context),
-      body: SingleChildScrollView(
+      body: isLoading ? Container(
+        child: Center(child: CircularProgressIndicator()),
+      ): SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height-50,
           alignment: Alignment.bottomCenter,
@@ -54,6 +71,7 @@ class _SignUpState extends State<SignUp> {
                             style: simpleTextStyle(Colors.white, 16),
                             decoration: textFieldInputDecoration("email")),
                         TextFormField(
+                            obscureText: true,
                             validator: (val){
                               return val!=null&&(val.length>6) ? null:"password must contain 6+ characters";
                             },
