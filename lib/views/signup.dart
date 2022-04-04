@@ -31,7 +31,11 @@ class _SignUpState extends State<SignUp> {
       await authMethods.signUpwithEmailAndPassword(emailTextEditingController.text, passwordTextEditingController.text).then((value) {
         // ignore: avoid_print
        // print("${value.uid}");
-        databaseMethods.uploadUserInfo(name, email)
+        Map<String,String> userInfoMap={
+          "name" : userNameTextEditingController.text,
+          "email" : emailTextEditingController.text
+        };
+        databaseMethods.uploadUserInfo(userInfoMap);
         Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) =>ChatRoom()
         ));

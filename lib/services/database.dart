@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseMethods{
   getUserByUsername(String username) async {
-   /* return await FirebaseFirestore.instance.collection("user")
+    return await FirebaseFirestore.instance.collection("user")
         .where("name", isEqualTo: username)
-        .get();*/
+        .get();
   }
   getUserByUseremail(String userEmail) async {
    /* return await FirebaseFirestore.instance.collection("user")
@@ -12,12 +12,9 @@ class DatabaseMethods{
         .get();*/
   }
 
-  uploadUserInfo(String name,String email) {
-    /*Firestore.instance.collection("user")
-        .add(userMap).catchError((e){
-      print(e.toString());
-    });*/
-    FirebaseFirestore.instance.collection("Utilisateurs").add(data)
+  uploadUserInfo(userMap) {
+    FirebaseFirestore.instance.collection("Users_chat")
+        .add(userMap);
   }
 
   createChatRoom(String charRoomId, chatRoomMap) {
