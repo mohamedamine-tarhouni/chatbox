@@ -15,8 +15,7 @@ class _SearchScreenState extends State<SearchScreen> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
   TextEditingController searchTextEditingController =
       new TextEditingController();
- // QuerySnapshot? searchSnapshot;
-  late QuerySnapshot<Map<String, dynamic>> searchSnapshot;
+  QuerySnapshot? searchSnapshot;
   initiateSearch(){
     databaseMethods
         .getUserByUsername(searchTextEditingController.text)
@@ -29,22 +28,22 @@ class _SearchScreenState extends State<SearchScreen> {
   }
   Widget searchList() {
     //var data = searchSnapshot?.docs!.data();
-    return  ListView.builder(
+    return searchSnapshot !=null ? ListView.builder(
       shrinkWrap: true,
-        itemCount: searchSnapshot.docs.length,
+        itemCount: searchSnapshot?.docs.length,
         itemBuilder: (context, index) {
       return SearchTile(
-        userName: searchSnapshot.docs[index].data()['name'],
-        userEmail: searchSnapshot.docs[index].data()['email'],
-       /* userName: searchSnapshot?.docs[index].data()["name"],
-        userEmail: "midouch",*/
+        /*userName: searchSnapshot?.docs[index]["name"],
+        userEmail: searchSnapshot?.docs[index]["email"],*/
+        userName: "midouch",
+        userEmail: "midouch",
 
       );
-    });
+    }):Container();
   }
 @override
   void initState() {
-    //initiateSearch();
+    initiateSearch();
     super.initState();
   }
   @override
@@ -70,6 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   GestureDetector(
                     onTap: () {
                       initiateSearch();
+
                     },
                     child: Container(
                         height: 40,
@@ -86,7 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ],
               ),
             ),
-            searchList(),
+            searchList()
           ],
         ),
       ),
@@ -107,8 +107,7 @@ class SearchTile extends StatelessWidget {
           Column(
             children: [
               Text(userName!,style: simpleTextStyle(Colors.white, 16),),
-              Text(userEmail!,style: simpleTextStyle(Colors.white, 16),),
-              Text("userEmail!",style: simpleTextStyle(Colors.white, 16),)
+              Text(userEmail!,style: simpleTextStyle(Colors.white, 16),)
             ],
           ),
           Spacer(),
