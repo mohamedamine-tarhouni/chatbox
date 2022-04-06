@@ -23,6 +23,8 @@ dependencies:
   firebase_storage: ^10.2.9
   firebase_auth: ^3.3.12
   http: ^0.13.4
+  shared_preferences: ^2.0.13
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   flutter_test:
