@@ -1,4 +1,5 @@
 import 'package:chatbox/helper/constants.dart';
+import 'package:chatbox/helper/helperFunctions.dart';
 import 'package:chatbox/services/database.dart';
 import 'package:chatbox/views/conversationScreen.dart';
 import 'package:chatbox/widgets/widget.dart';
@@ -12,7 +13,7 @@ class SearchScreen extends StatefulWidget {
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
-
+String? _myName;
 class _SearchScreenState extends State<SearchScreen> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
   TextEditingController searchTextEditingController =
@@ -99,6 +100,13 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     initiateSearch();
     super.initState();
+  }
+  getUserInfo() async{
+     _myName= await HelperFunctions.getUserNameSharedPreference();
+     setState(() {
+
+     });
+     print(_myName);
   }
   @override
   Widget build(BuildContext context) {
