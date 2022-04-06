@@ -17,12 +17,16 @@ class _ChatRoomState extends State<ChatRoom> {
   AuthMethods authMethods = new AuthMethods();
   @override
   void initState() {
+    getUserInfo();
     // TODO: implement initState
     super.initState();
   }
 
   getUserInfo() async{
     Constants.myName=(await HelperFunctions.getUserNameSharedPreference())!;
+    setState(() {
+
+    });
   }
   @override
   Widget build(BuildContext context) {

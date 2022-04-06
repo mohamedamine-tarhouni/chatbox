@@ -32,7 +32,7 @@ class _SignUpState extends State<SignUp> {
         "email" : emailTextEditingController.text
       };
       HelperFunctions.saveUserEmailSharedPreference(emailTextEditingController.text);
-      HelperFunctions.saveUserEmailSharedPreference(userNameTextEditingController.text);
+      HelperFunctions.saveUserNameSharedPreference(userNameTextEditingController.text);
         
 
       setState(() {

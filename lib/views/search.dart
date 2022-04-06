@@ -13,7 +13,7 @@ class SearchScreen extends StatefulWidget {
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
-String? _myName;
+//String? _myName;
 class _SearchScreenState extends State<SearchScreen> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
   TextEditingController searchTextEditingController =
@@ -32,16 +32,21 @@ class _SearchScreenState extends State<SearchScreen> {
   }
   //create Chatroom,send user to convo screen,pushreplacement
   createChatroomAndStartConversation(String userName){
+    print(Constants.myName);
+    print(userName);
     if(userName != Constants.myName){
-      String chatRoomId =getChatRoomId(userName,Constants.myName);
-      List<String> users = [userName,Constants.myName];
-      Map<String,dynamic> chatRoomMap={
-        "users":users,
-        "chatroomId" : chatRoomId
-      };
-      databaseMethods.createChatRoom(chatRoomId, chatRoomMap);
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => conversationScreen()));
+        String chatRoomId =getChatRoomId(userName,Constants.myName!);
+        List<String?> users;
+        users = [userName,Constants.myName];
+        Map<String,dynamic> chatRoomMap={
+          "users":users,
+          "chatroomId" : chatRoomId
+        };
+        databaseMethods.createChatRoom(chatRoomId, chatRoomMap);
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => conversationScreen(chatRoomId)));
+
+
     }else{
       print("you cant talk to yourself");
     }
@@ -96,18 +101,26 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
+  getChatRoomId(String a, String b) {
+  if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+    return "$b\_$a";
+  } else {
+    return "$a\_$b";
+  }
+}
 @override
   void initState() {
-    initiateSearch();
+   // getUserInfo();
     super.initState();
   }
-  getUserInfo() async{
-     _myName= await HelperFunctions.getUserNameSharedPreference();
-     setState(() {
+
+  /*getUserInfo() async{
+    _myName= await HelperFunctions.getUserNameSharedPreference();
+     setState(()  {
 
      });
-     print(_myName);
-  }
+     print("$_myName");
+  }*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,7 +144,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   GestureDetector(
                     onTap: () {
                       initiateSearch();
-
                     },
                     child: Container(
                         height: 40,
@@ -158,10 +170,4 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 
-getChatRoomId(String a, String b) {
-  if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-    return "$b\_$a";
-  } else {
-    return "$a\_$b";
-  }
-}
+
