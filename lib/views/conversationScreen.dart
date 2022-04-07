@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/constants.dart';
@@ -5,6 +6,8 @@ import '../services/database.dart';
 import '../widgets/widget.dart';
 class conversationScreen extends StatefulWidget {
   late final String chatRoomId;
+
+  conversationScreen(this.chatRoomId);
   @override
   State<conversationScreen> createState() => _conversationScreenState();
 }
@@ -14,31 +17,44 @@ class _conversationScreenState extends State<conversationScreen> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
 
   TextEditingController messageController = new TextEditingController();
+  late Stream<QuerySnapshot<Map<String, dynamic>>>? chatMessagesStream;
 
-  /*Widget ChatMessageList() {
-    return StreamBuilder(
+  Widget ChatMessageList() {
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: chatMessagesStream,
       builder: (context, snapshot) {
-        return ListView.builder(
-            itemCount: snapshot.data.documents.lenth,
+        return snapshot.hasData ? ListView.builder(
+            itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index){
-              return
-            });
+              return MessageTile(snapshot.data?.docs[index].data()['message'],
+                  snapshot.data?.docs[index].data()['sendBy']==Constants.myName);
+            }) :Container();
       },
     );
-  }*/
+  }
 
   sendMessage() {
 
     if(messageController.text.isNotEmpty){
-      Map<String, String> messageMap = {
+      Map<String, dynamic> messageMap = {
         "message" : messageController.text,
         "sendBy" : Constants.myName,
+        "time" : DateTime.now().millisecondsSinceEpoch,
       };
-      //databaseMethods.getConversationMessages(widget.chatRoomId, messageMap);
+      databaseMethods.addConversationMessages(widget.chatRoomId, messageMap);
+      messageController.text="";
     }
   }
-
+@override
+  void initState() {
+    databaseMethods.getConversationMessages(widget.chatRoomId).then((value){
+      setState(() {
+        chatMessagesStream=value;
+      });
+    });
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +62,7 @@ class _conversationScreenState extends State<conversationScreen> {
       body: Container(
         child: Stack(
           children: [
+            ChatMessageList(),
             Container(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -55,7 +72,7 @@ class _conversationScreenState extends State<conversationScreen> {
                   children: [
                     Expanded(
                         child: TextField(
-                         // controller: messageController,
+                          controller: messageController,
                           decoration: InputDecoration(
                               hintText: "Message...",
                               hintStyle: TextStyle(color: Colors.white54),
@@ -63,7 +80,7 @@ class _conversationScreenState extends State<conversationScreen> {
                         )),
                     GestureDetector(
                       onTap: () {
-                       // sendMessage();
+                        sendMessage();
                       },
                       child: Container(
                           height: 40,
@@ -87,3 +104,50 @@ class _conversationScreenState extends State<conversationScreen> {
     );
   }
 }
+
+class MessageTile extends StatelessWidget {
+  //const MessageTile({Key? key}) : super(key: key);
+  final String message;
+  final bool isSentByMe;
+  MessageTile(this.message,this.isSentByMe);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: isSentByMe ?  0:24,right: isSentByMe ?  24:0),
+      margin: EdgeInsets.symmetric(vertical: 8),
+      width: MediaQuery.of(context).size.width,
+      alignment:isSentByMe ? Alignment.centerRight : Alignment.centerLeft ,
+      child: Container(
+
+        padding: EdgeInsets.symmetric(horizontal: 24,vertical: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: isSentByMe ? [
+              const Color(0xff007EF4),
+              const Color(0xff007EF4)
+            ] : [
+              const Color(0x1AFFFFFF),
+              const Color(0x1AFFFFFF)
+            ]
+          ),
+          borderRadius: isSentByMe ?
+              BorderRadius.only(
+                topLeft:Radius.circular(23),
+                topRight: Radius.circular(23),
+                bottomLeft: Radius.circular(23)
+              ):
+          BorderRadius.only(
+              topLeft:Radius.circular(23),
+              topRight: Radius.circular(23),
+              bottomRight: Radius.circular(23)
+          )
+
+
+        ),
+        child: Text(message,style: simpleTextStyle(Colors.white, 20),),
+      ),
+    );
+  }
+}
+

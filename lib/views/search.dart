@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
     print(Constants.myName);
     print(userName);
     if(userName != Constants.myName){
-        String chatRoomId =getChatRoomId(userName,Constants.myName!);
+        String chatRoomId =getChatRoomId(userName,Constants.myName);
         List<String?> users;
         users = [userName,Constants.myName];
         Map<String,dynamic> chatRoomMap={
