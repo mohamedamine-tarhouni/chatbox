@@ -57,7 +57,7 @@ class DatabaseMethods {
 
   //recuperation des chatroom
   getChatRooms(String userName) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection("ChatRoom")
         .where("users", arrayContains: userName)
         .snapshots();
