@@ -27,4 +27,5 @@ Nous n'avons pas eu le temps d'ajouter des fonctionnalités comme les photos de 
 la récupération de compte lorsque le mot de passe est oubliée.
 
 Nous n'avons pas trouvé d'autre moyen que d'afficher seulement les utilisateurs
-qu'on a contacté.
+qu'on a contacté.(Parfois ca bug et affiche les conversations des autres utilisateur qu'on n'a pas contacté)
+
