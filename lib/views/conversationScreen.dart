@@ -93,9 +93,9 @@ class _conversationScreenState extends State<conversationScreen> {
                                 const Color(0x36FFFFFF),
                                 const Color(0x0FFFFFFF),
                               ]),
-                              borderRadius: BorderRadius.circular(8)),
+                              borderRadius: BorderRadius.circular(15)),
                           child: Image.asset(
-                              "assets/images/icons8-chercher-30.png")),
+                              "assets/images/send.png")),
                     )
                   ],
                 ),

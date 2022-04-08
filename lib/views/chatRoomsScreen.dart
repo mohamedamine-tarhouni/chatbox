@@ -136,7 +136,7 @@ class ChatRoomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return chatRoom.contains(Constants.myName) ? GestureDetector(
       onTap: () {
         Navigator.push(
             context,
@@ -172,6 +172,6 @@ class ChatRoomTile extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ):Container();
   }
 }
