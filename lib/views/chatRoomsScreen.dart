@@ -84,7 +84,7 @@ class _ChatRoomState extends State<ChatRoom> {
                     children: [
                       Icon(Icons.logout, color: Colors.black),
                       const SizedBox(width: 8,),
-                      Text('dÃ©connexion'),
+                      Text('déconnexion'),
                     ],
                   ),
                 ),
