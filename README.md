@@ -1,16 +1,30 @@
-# chatbox
+############################################################################ CHATBOX FLUTTER ############################################################################
 
-A new Flutter project.
 
-## Getting Started
+- UTILISATION:
 
-This project is a starting point for a Flutter application.
+Connectez-vous où créez un compte.
 
-A few resources to get you started if this is your first Flutter project:
+Une fois connecté, nous arrivons sur la page des contacts,
+cette page est vide lorsque nous n'avons pas encore envoyé de message.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Cliquez sur l'icon situé à droite de la barre de navigation pour accéder
+à la page d'ajout de contact.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Tapez ensuite un nom d'utilisateur dans la barre de recherche,
+et cliquez sur le bouton message.
+
+Après avoi envoyé un message, cet utilisateur devrait apparaitre dans votre
+liste de contacts.
+
+Sur la page de contact, vous pouvez vous déconnecter en appuyant sur votre nom d'utilisateur
+situé en haut à gauche de votre écran, et en appuyant sur le bouton "déconnexion".
+
+
+- DIFICULTEES:
+
+Nous n'avons pas eu le temps d'ajouter des fonctionnalités comme les photos de profil ou
+la récupération de compte lorsque le mot de passe est oubliée.
+
+Nous n'avons pas trouvé d'autre moyen que d'afficher seulement les utilisateurs
+qu'on a contacté.
