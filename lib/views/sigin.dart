@@ -20,47 +20,53 @@ class _SignInState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
   AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
+  //le mail
   TextEditingController emailTextEditingController =
       new TextEditingController();
+  //le mot de passe
   TextEditingController passwordTextEditingController =
       new TextEditingController();
-  bool isLoading=false;
+  //page en train de se charger
+  bool isLoading = false;
+
   QuerySnapshot<Map<String, dynamic>>? snapshotUserInfo;
-  signIn(){
+  //sauvegarder la session de l'utilisateur si le forumlaire est validé
+  signIn() {
     final form = formKey.currentState;
-    if(form != null && form.validate()){
-      HelperFunctions.saveUserEmailSharedPreference(emailTextEditingController.text);
+    if (form != null && form.validate()) {
+      HelperFunctions.saveUserEmailSharedPreference(
+          emailTextEditingController.text);
       setState(() {
-        isLoading=true;
+        isLoading = true;
       });
-      databaseMethods.getUserByUseremail(emailTextEditingController.text).then((value){
-        snapshotUserInfo=value;
-        HelperFunctions.saveUserNameSharedPreference(snapshotUserInfo?.docs[0].data()["name"]);
+      databaseMethods
+          .getUserByUseremail(emailTextEditingController.text)
+          .then((value) {
+        snapshotUserInfo = value;
+        HelperFunctions.saveUserNameSharedPreference(
+            snapshotUserInfo?.docs[0].data()["name"]);
         print("${snapshotUserInfo?.docs[0].data()["name"]}");
-
       });
-      authMethods.signInWithEmailAndPassowrd(
-          emailTextEditingController.text,
-          passwordTextEditingController.text).then((value){
-            if(value !=null){
-
-              HelperFunctions.saveUserLoggedInSharedPreference(true);
-              Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context) =>ChatRoom()
-              ));
-            }
+      authMethods
+          .signInWithEmailAndPassowrd(emailTextEditingController.text,
+              passwordTextEditingController.text)
+          .then((value) {
+        if (value != null) {
+          HelperFunctions.saveUserLoggedInSharedPreference(true);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+        }
       });
-
-
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarMain(context),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height - 50,
+          height: MediaQuery.of(context).size.height - 100,
           alignment: Alignment.bottomCenter,
           child: Container(
               padding: EdgeInsets.symmetric(horizontal: 24),
@@ -71,17 +77,22 @@ class _SignInState extends State<SignIn> {
                     key: formKey,
                     child: Column(children: [
                       TextFormField(
-                          validator: (val){
-                            return val!=null&&RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ?
-                            null : "Enter a correct email";
+                          validator: (val) {
+                            return val != null &&
+                                    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(val)
+                                ? null
+                                : "Enter a correct email";
                           },
                           controller: emailTextEditingController,
                           style: simpleTextStyle(Colors.white, 16),
                           decoration: textFieldInputDecoration("email")),
                       TextFormField(
                           obscureText: true,
-                          validator: (val){
-                            return val!=null&&(val.length>6) ? null:"password must contain 6+ characters";
+                          validator: (val) {
+                            return val != null && (val.length > 6)
+                                ? null
+                                : "password must contain 6+ characters";
                           },
                           controller: passwordTextEditingController,
                           style: simpleTextStyle(Colors.white, 16),
@@ -106,7 +117,7 @@ class _SignInState extends State<SignIn> {
                     height: 16,
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       signIn();
                     },
                     child: Container(

@@ -8,7 +8,9 @@ class Authenticate extends StatefulWidget {
   @override
   State<Authenticate> createState() => _AuthenticateState();
 }
-
+//cette page permet de gérer le changement entre les pages sign in et signup
+//le bouton register now dans Sign In
+//le bouton Sign in now dans Sign Up
 class _AuthenticateState extends State<Authenticate> {
 
   bool showSignIn=true;

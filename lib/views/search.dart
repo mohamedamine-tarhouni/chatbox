@@ -13,13 +13,14 @@ class SearchScreen extends StatefulWidget {
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
-//String? _myName;
+//la barre de recherche
 class _SearchScreenState extends State<SearchScreen> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
   TextEditingController searchTextEditingController =
       new TextEditingController();
+  //un map avec tous les resultats
    QuerySnapshot<Map<String, dynamic>>? searchSnapshot;
-
+//lancement de la recherche
   initiateSearch(){
     databaseMethods
         .getUserByUsername(searchTextEditingController.text)
@@ -53,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   }
 
-
+//la liste des utilisateurs trouvés
   Widget searchList() {
     //var data = searchSnapshot?.docs!.data();
     return searchSnapshot !=null ? ListView.builder(
@@ -68,6 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
       );
     }):Container();
   }
+  //la widget qui contient l'affichage des resultats trouvés
   Widget SearchTile({String? userName, String? userEmail}){
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24,vertical: 16),
@@ -101,6 +103,8 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
+
+  //récuperation l'ID du chatroom
   getChatRoomId(String a, String b) {
   if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
     return "$b\_$a";
@@ -110,7 +114,6 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 @override
   void initState() {
-   // getUserInfo();
     super.initState();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 @override
+//configuration d'une AppBar commune
 AppBar appBarMain(BuildContext context) {
   return AppBar(
     title: Image.asset(
@@ -11,6 +12,7 @@ AppBar appBarMain(BuildContext context) {
     centerTitle: false,
   );
 }
+//configuration d'un textfield commun
 InputDecoration textFieldInputDecoration(String hintText){
   return InputDecoration(
       hintText: hintText,
@@ -25,6 +27,7 @@ InputDecoration textFieldInputDecoration(String hintText){
       )
   );
 }
+//Style d'un texte
 TextStyle simpleTextStyle(Color color,double FS){
   return TextStyle(
     color: color,

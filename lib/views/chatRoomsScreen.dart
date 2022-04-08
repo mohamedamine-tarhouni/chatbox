@@ -98,7 +98,7 @@ class ChatRoomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return chatRoom.contains(Constants.myName) ? GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => conversationScreen(chatRoom)));
@@ -114,7 +114,7 @@ class ChatRoomTile extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(40)),
-              child: Text("${userName.substring(0, 1)}",style: simpleTextStyle(Colors.white, 22),),
+              child: Text("${userName.replaceAll("_", "").replaceAll(Constants.myName, "").substring(0, 1)}",style: simpleTextStyle(Colors.white, 22),),
             ),
             SizedBox(
               width: 8,
@@ -126,6 +126,6 @@ class ChatRoomTile extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ) : Container();
   }
 }

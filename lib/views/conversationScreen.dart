@@ -13,12 +13,13 @@ class conversationScreen extends StatefulWidget {
 }
 
 class _conversationScreenState extends State<conversationScreen> {
-  //const conversationScreen({Key? key}) : super(key: key);
   DatabaseMethods databaseMethods = new DatabaseMethods();
-
+  //le message à envoyer
   TextEditingController messageController = new TextEditingController();
   late Stream<QuerySnapshot<Map<String, dynamic>>>? chatMessagesStream;
 
+  //affichage des messages(comme la recherche des
+  // utilisateurs mais sans recharger la page)
   Widget ChatMessageList() {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: chatMessagesStream,
@@ -32,7 +33,7 @@ class _conversationScreenState extends State<conversationScreen> {
       },
     );
   }
-
+//envoie du message
   sendMessage() {
 
     if(messageController.text.isNotEmpty){
@@ -55,6 +56,8 @@ class _conversationScreenState extends State<conversationScreen> {
     // TODO: implement initState
     super.initState();
   }
+
+  //la page des messages
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +107,7 @@ class _conversationScreenState extends State<conversationScreen> {
     );
   }
 }
-
+//la fonction d'affichage des messages selon l'utilisateur connecté
 class MessageTile extends StatelessWidget {
   //const MessageTile({Key? key}) : super(key: key);
   final String message;
